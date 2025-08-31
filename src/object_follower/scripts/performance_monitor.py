@@ -162,8 +162,8 @@ class PerformanceMonitor:
         stability_score = self.calculate_stability_score()
         current_detection = self.detection_states[-1] if self.detection_states else False
         
-        status_icon = "🎯" if current_detection else "❌"
-        quality_icon = "🟢" if stability_score > 80 else "🟡" if stability_score > 60 else "🔴"
+        status_icon = "Target Hit" if current_detection else "Target Not Hit"
+        quality_icon = "Super" if stability_score > 80 else "Good" if stability_score > 60 else "Bad"
         
         rospy.loginfo(f"{status_icon} Target: {current_detection} | {quality_icon} Stability: {stability_score:.1f}%")
     
@@ -207,30 +207,30 @@ class PerformanceMonitor:
         
         # Print comprehensive report
         rospy.loginfo("=" * 60)
-        rospy.loginfo("📊 PERFORMANCE REPORT (Last 10 seconds)")
+        rospy.loginfo("PERFORMANCE REPORT (Last 10 seconds)")
         rospy.loginfo("=" * 60)
-        rospy.loginfo(f"🎯 TRACKING PERFORMANCE:")
+        rospy.loginfo(f"TRACKING PERFORMANCE:")
         rospy.loginfo(f"   Position Error: {avg_pos_error:.3f} ± {std_pos_error:.3f} (max: {max_pos_error:.3f})")
         rospy.loginfo(f"   Distance Error: {avg_dist_error:.3f} ± {std_dist_error:.3f} meters")
         rospy.loginfo(f"   Target Uptime: {uptime_percentage:.1f}%")
         rospy.loginfo(f"   Detection Rate: {detection_rate:.1f} Hz")
         
-        rospy.loginfo(f"🚗 CONTROL PERFORMANCE:")
+        rospy.loginfo(f"CONTROL PERFORMANCE:")
         rospy.loginfo(f"   Average Speed: {avg_velocity:.3f} m/s")
         rospy.loginfo(f"   Average Turn Rate: {avg_angular_vel:.3f} rad/s")
         rospy.loginfo(f"   Control Smoothness: {avg_smoothness:.3f} (lower is smoother)")
         
-        rospy.loginfo(f"⚡ RESPONSE METRICS:")
+        rospy.loginfo(f"RESPONSE METRICS:")
         rospy.loginfo(f"   Target Acquisitions: {self.target_acquisition_count}")
         rospy.loginfo(f"   Target Losses: {self.target_loss_count}")
         rospy.loginfo(f"   Avg Response Time: {avg_response_time:.3f}s")
         
-        rospy.loginfo(f"📈 OVERALL ASSESSMENT:")
+        rospy.loginfo(f"OVERALL ASSESSMENT:")
         stability_grade = "EXCELLENT" if stability_score > 85 else "GOOD" if stability_score > 70 else "FAIR" if stability_score > 50 else "NEEDS IMPROVEMENT"
         rospy.loginfo(f"   Stability Score: {stability_score:.1f}% ({stability_grade})")
         
         if self.detection_methods:
-            rospy.loginfo(f"🔍 DETECTION METHODS: {dict(self.detection_methods)}")
+            rospy.loginfo(f"DETECTION METHODS: {dict(self.detection_methods)}")
         
         rospy.loginfo("=" * 60)
     

@@ -27,16 +27,16 @@ class SystemMonitor:
         if msg.data != self.target_found:
             self.target_found = msg.data
             if self.target_found:
-                rospy.loginfo("🎯 TARGET DETECTED!")
+                rospy.loginfo("TARGET DETECTED!")
             else:
-                rospy.loginfo("❌ Target lost")
+                rospy.loginfo("Target lost")
                 
     def distance_callback(self, msg):
         self.distance = msg.data
         
     def cmd_vel_callback(self, msg):
         if self.target_found and self.target_position:
-            rospy.loginfo(f"🚗 Following: pos=({self.target_position.x:.2f},{self.target_position.y:.2f}) "
+            rospy.loginfo(f"Following: pos=({self.target_position.x:.2f},{self.target_position.y:.2f}) "
                          f"dist={self.distance:.2f}m → vel=({msg.linear.x:.2f},{msg.angular.z:.2f})")
 
 if __name__ == '__main__':

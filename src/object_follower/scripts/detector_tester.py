@@ -64,7 +64,7 @@ class DetectorTester:
                         cy = int(M["m01"] / M["m00"])
                         cv2.circle(result_image, (cx, cy), 10, (255, 0, 0), -1)
                         
-                        rospy.loginfo_throttle(2, f"🎯 Manual detection: Red object at ({cx}, {cy}), area: {cv2.contourArea(largest_contour):.0f}")
+                        rospy.loginfo_throttle(2, f"Manual detection: Red object at ({cx}, {cy}), area: {cv2.contourArea(largest_contour):.0f}")
             
             cv2.imshow('Detector Test', result_image)
             cv2.waitKey(1)
@@ -75,17 +75,17 @@ class DetectorTester:
     def target_found_callback(self, msg):
         if msg.data:
             self.target_detections += 1
-            rospy.loginfo("✓ Enhanced detector found target!")
+            rospy.loginfo("Enhanced detector found target!")
     
     def target_position_callback(self, msg):
-        rospy.loginfo(f"📍 Target position: ({msg.x:.2f}, {msg.y:.2f})")
+        rospy.loginfo(f"Target position: ({msg.x:.2f}, {msg.y:.2f})")
     
     def print_stats(self, event):
         rospy.loginfo("=" * 40)
-        rospy.loginfo(f"📊 DETECTOR TEST STATS")
-        rospy.loginfo(f"📷 Images received: {self.image_count}")
-        rospy.loginfo(f"🎯 Target detections: {self.target_detections}")
-        rospy.loginfo(f"📈 Detection rate: {self.target_detections/max(1,self.image_count/10)*100:.1f}%")
+        rospy.loginfo(f"DETECTOR TEST STATS")
+        rospy.loginfo(f"Images received: {self.image_count}")
+        rospy.loginfo(f"Target detections: {self.target_detections}")
+        rospy.loginfo(f"Detection rate: {self.target_detections/max(1,self.image_count/10)*100:.1f}%")
         rospy.loginfo("=" * 40)
 
 if __name__ == '__main__':
